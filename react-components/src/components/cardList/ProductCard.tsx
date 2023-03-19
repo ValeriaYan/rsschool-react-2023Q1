@@ -1,11 +1,11 @@
 import React from 'react';
 
 type ProductCardProps = {
-  key: number;
-  title: string;
-  price: number;
-  description: string;
-  img: string;
+  key?: string;
+  title?: string;
+  price?: number;
+  description?: string;
+  img?: string;
 };
 
 class ProductCard extends React.Component<ProductCardProps, unknown> {

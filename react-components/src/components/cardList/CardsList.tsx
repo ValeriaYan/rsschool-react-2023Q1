@@ -5,7 +5,7 @@ type CardsListProps = {
   products: Card[];
 };
 
-type Card = {
+export type Card = {
   id: number;
   title: string;
   price: number;
@@ -24,7 +24,7 @@ class CardsList extends React.Component<CardsListProps, unknown> {
       <>
         {this.props.products.map((card) => (
           <ProductCard
-            key={card.id}
+            key={String(card.id)}
             title={card.title}
             price={card.price}
             description={card.description}
