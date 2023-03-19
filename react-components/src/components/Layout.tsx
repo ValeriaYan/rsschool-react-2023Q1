@@ -6,11 +6,17 @@ class Layout extends React.Component {
     return (
       <>
         <header className="header">
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/about">About Us</NavLink>
+          <div className="container">
+            <nav className="nav">
+              <NavLink to="/">Home</NavLink>
+              <NavLink to="/about">About Us</NavLink>
+            </nav>
+          </div>
         </header>
         <main className="main">
-          <Outlet />
+          <div className="container">
+            <Outlet />
+          </div>
         </main>
       </>
     );
