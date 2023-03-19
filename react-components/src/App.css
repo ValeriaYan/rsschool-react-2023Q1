@@ -54,11 +54,36 @@
 
 .product-card__title {
     font-size: 20px;
-    color: rgb(255, 0, 221);
+    color: var(--main-color);
 }
 
 .product-card__price {
     font-size: 20px;
+}
+
+
+.search {
+    margin-bottom: 20px;
+
+    display: inline-flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    padding: 10px;
+
+    font-size: 18px;
+    border-radius: 9px;
+    border: 1px solid #eeeeee;
+}
+
+.search input {
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.search > input:focus ~ svg {
+   fill: var(--main-color)
 }
 
 ::-webkit-scrollbar {

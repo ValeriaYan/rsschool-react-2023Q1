@@ -12,6 +12,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --main-color: rgb(0, 155, 0);
+  --hover-color: rgb(195, 255, 195);
 }
 
 a {
@@ -20,11 +23,11 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  color: rgb(255, 187, 246);
+  color: var(--hover-color);
 }
 
 a.active {
-    color: rgb(255, 0, 221);
+    color: var(--main-color);
 }
 
 body {
@@ -57,6 +60,10 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+input {
+  background-color: transparent;
 }
 
 @media (prefers-color-scheme: light) {

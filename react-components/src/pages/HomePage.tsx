@@ -1,5 +1,6 @@
 import React from 'react';
 import { CardsList } from '../components/cardList/CardsList';
+import { Search } from '../components/search/Search';
 
 type HomePageState = {
   error: Error | null;
@@ -46,6 +47,7 @@ class HomePage extends React.Component<unknown, HomePageState> {
       console.log(products);
       return (
         <>
+          <Search />
           <div className="card-list">
             <CardsList products={products} />
           </div>
