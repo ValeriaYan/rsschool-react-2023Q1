@@ -44,7 +44,6 @@ class HomePage extends React.Component<unknown, HomePageState> {
     } else if (!isLoaded) {
       return <div className="loading">Loading...</div>;
     } else {
-      console.log(products);
       return (
         <>
           <Search />

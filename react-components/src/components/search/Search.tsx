@@ -10,7 +10,7 @@ class Search extends React.Component<unknown, SearchState> {
     const savedValue = localStorage.getItem('search');
     if (savedValue) {
       this.state = {
-        value: savedValue,
+        value: JSON.parse(savedValue),
       };
     } else {
       this.state = {
@@ -21,11 +21,14 @@ class Search extends React.Component<unknown, SearchState> {
     this.onInputChange = this.onInputChange.bind(this);
   }
 
+  componentWillUnmount() {
+    localStorage.setItem('search', JSON.stringify(this.state.value));
+  }
+
   onInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       value: event.target.value,
     });
-    localStorage.setItem('search', event.target?.value);
   }
 
   render(): React.ReactNode {
