@@ -5,9 +5,6 @@
 }
 
 .main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .container {
@@ -45,7 +42,7 @@
 }
 
 .product-card:hover {
-    background-color: rgba(68, 68, 68, 0.2);
+    background-color: var(--sub-color);
 }
 
 .product-card__img {
@@ -54,7 +51,7 @@
 
 .product-card__title {
     font-size: 20px;
-    color: var(--main-color);
+    color: var(--text-main-color);
 }
 
 .product-card__price {
@@ -83,8 +80,54 @@
 }
 
 .search > input:focus ~ svg {
-   fill: var(--main-color)
+   fill: var(--text-main-color);
 }
+
+.error {
+    color: var(--error-color);
+}
+
+form {
+    text-align: left;
+    width: 30vw;
+    padding: 20px;
+    margin: 0 auto;
+
+    font-size: 18px;
+    background-color: var(--sub-color);
+    border-radius: 10px;
+}
+
+form label {
+    margin-bottom: 10px;
+}
+
+label input {
+    font-size: 18px;
+    padding: 5px;
+    margin: 0 10px;
+    background-color: var(--background-color);
+    border: none;
+} 
+
+input[type="file"] {
+    display: none;
+}
+
+.file-button {
+    padding: 10px;
+    margin-right: 10px;
+
+    border-radius: 7px;
+    background-color: var(--button-color);
+
+    cursor: pointer;
+}
+
+.file-button:hover {
+    background-color: var(--sub-color);
+}
+
 
 ::-webkit-scrollbar {
     width: 4px;
@@ -101,6 +144,10 @@
 @media(max-width: 1200px) {
     .product-card {
         flex: 0 0 45%;
+    }
+
+    form {
+        width: 70vw;
     }
 }
 
