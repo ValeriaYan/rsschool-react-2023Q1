@@ -12,6 +12,7 @@ type UserFormState = {
   emptyDateField?: boolean;
   emptyConfirmCheckbox?: boolean;
   emptyRadioFields?: boolean;
+  cardCreated: boolean;
 };
 
 type UserFormProps = {
@@ -40,6 +41,7 @@ class UserForm extends React.Component<UserFormProps, UserFormState> {
       emptyDateField: false,
       emptyConfirmCheckbox: false,
       emptyRadioFields: false,
+      cardCreated: false,
     };
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -117,8 +119,20 @@ class UserForm extends React.Component<UserFormProps, UserFormState> {
         img: photo,
         country: this.selectRef.current?.value,
       });
+
+      this.setState({
+        cardCreated: true,
+      });
       this.formRef.current?.reset();
     }
+  }
+
+  componentDidUpdate() {
+    setTimeout(() => {
+      this.setState({
+        cardCreated: false,
+      });
+    }, 3000);
   }
 
   render() {
@@ -145,6 +159,7 @@ class UserForm extends React.Component<UserFormProps, UserFormState> {
         )}
         <CheckboxInput checkboxRef={this.checkboxRef} labelText="I consent to my personal data" />
         <button type="submit">Create User Card</button>
+        {this.state.cardCreated && <div className="success-message">{'Card created'}</div>}
       </form>
     );
   }

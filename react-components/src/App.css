@@ -124,6 +124,11 @@ input[type="file"] {
     cursor: pointer;
 }
 
+.success-message {
+    text-align: center;
+    color: var(--text-main-color);
+}
+
 .file-button:hover {
     background-color: var(--sub-color);
 }
