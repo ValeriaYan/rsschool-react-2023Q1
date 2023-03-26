@@ -5,6 +5,7 @@ import { SelectInput } from './selectInput/SelectInput';
 import { CheckboxInput } from './checkboxInput/CheckboxInput';
 import { RadioInputs } from './radioInput/RadioInputs';
 import { FileInput } from './fileInput/FileInput';
+import { User } from '../userCardList/UsersList';
 
 type UserFormState = {
   emptyNameField?: boolean;
@@ -12,14 +13,19 @@ type UserFormState = {
   emptyConfirmCheckbox?: boolean;
   emptyRadioFields?: boolean;
 };
-class UserForm extends React.Component<unknown, UserFormState> {
+
+type UserFormProps = {
+  updateData: (users: User) => void;
+};
+class UserForm extends React.Component<UserFormProps, UserFormState> {
   textRef: React.RefObject<HTMLInputElement>;
   dateRef: React.RefObject<HTMLInputElement>;
-  selectRef: React.RefObject<HTMLInputElement>;
+  selectRef: React.RefObject<HTMLSelectElement>;
   checkboxRef: React.RefObject<HTMLInputElement>;
   radioRefs: React.RefObject<HTMLInputElement>[];
   fileRef: React.RefObject<HTMLInputElement>;
-  constructor(props: unknown) {
+  formRef: React.RefObject<HTMLFormElement>;
+  constructor(props: UserFormProps) {
     super(props);
     this.textRef = React.createRef();
     this.dateRef = React.createRef();
@@ -27,6 +33,7 @@ class UserForm extends React.Component<unknown, UserFormState> {
     this.checkboxRef = React.createRef();
     this.radioRefs = [React.createRef(), React.createRef()];
     this.fileRef = React.createRef();
+    this.formRef = React.createRef();
 
     this.state = {
       emptyNameField: false,
@@ -61,17 +68,6 @@ class UserForm extends React.Component<unknown, UserFormState> {
       });
       isOk = true;
     }
-    if (this.checkboxRef.current && !this.checkboxRef.current.checked) {
-      this.setState({
-        emptyConfirmCheckbox: true,
-      });
-      isOk = false;
-    } else {
-      this.setState({
-        emptyConfirmCheckbox: false,
-      });
-      isOk = true;
-    }
 
     const radiosNotEmpty = this.radioRefs.some((elem) => elem.current?.checked);
     if (!radiosNotEmpty) {
@@ -86,19 +82,48 @@ class UserForm extends React.Component<unknown, UserFormState> {
       isOk = true;
     }
 
+    if (this.checkboxRef.current && !this.checkboxRef.current.checked) {
+      this.setState({
+        emptyConfirmCheckbox: true,
+      });
+      isOk = false;
+    } else {
+      this.setState({
+        emptyConfirmCheckbox: false,
+      });
+      isOk = true;
+    }
+
     return isOk;
   }
 
   onSubmit(event: React.FormEvent) {
     event?.preventDefault();
-    if(this.checkFields()) {
-      
+    if (this.checkFields()) {
+      let gender: string | undefined;
+      for (let i = 0; i < this.radioRefs.length; i++) {
+        if (this.radioRefs[i].current?.checked) {
+          gender = this.radioRefs[i].current?.value;
+        }
+      }
+      let photo = '';
+      if (this.fileRef.current?.files?.item(0)) {
+        photo = URL.createObjectURL(this.fileRef.current?.files?.item(0) as Blob);
+      }
+      this.props.updateData({
+        name: this.textRef.current?.value,
+        date: this.dateRef.current?.value,
+        gender: gender,
+        img: photo,
+        country: this.selectRef.current?.value,
+      });
+      this.formRef.current?.reset();
     }
   }
 
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.onSubmit} ref={this.formRef}>
         {this.state.emptyNameField && <div className="error">{'Name can not be empty'}</div>}
         <TextInput textRef={this.textRef} labelText="Name: " />
         {this.state.emptyDateField && <div className="error">{'Date can not be empty'}</div>}
