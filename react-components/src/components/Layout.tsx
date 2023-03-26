@@ -10,6 +10,7 @@ class Layout extends React.Component {
             <nav className="nav">
               <NavLink to="/">Home</NavLink>
               <NavLink to="/about">About Us</NavLink>
+              <NavLink to="/form">Form</NavLink>
             </nav>
           </div>
         </header>
