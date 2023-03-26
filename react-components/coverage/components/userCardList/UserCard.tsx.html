@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/cardList/ProductCard.tsx</title>
+    <title>Code coverage report for components/userCardList/UserCard.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/cardList</a> ProductCard.tsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/userCardList</a> UserCard.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -89,7 +89,9 @@
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -101,7 +103,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -117,30 +121,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
 &nbsp;
-type ProductCardProps = {
+type UserCardProps = {
   key?: string;
-  title?: string;
-  price?: number;
-  description?: string;
+  name?: string;
+  date?: string;
+  gender?: string;
   img?: string;
+  country?: string;
 };
 &nbsp;
-class ProductCard extends React.Component&lt;ProductCardProps, unknown&gt; {
+class UserCard extends React.Component&lt;UserCardProps, unknown&gt; {
   render(): React.ReactNode {
     return (
       &lt;&gt;
         &lt;div className="product-card card"&gt;
           &lt;img className="product-card card__img" src={this.props.img} alt="" /&gt;
-          &lt;div className="product-card card__title"&gt;{this.props.title}&lt;/div&gt;
-          &lt;div className="product-card card__price"&gt;${this.props.price}&lt;/div&gt;
-          &lt;div className="product-card card__desc"&gt;{this.props.description}&lt;/div&gt;
+          &lt;div className="product-card card__title"&gt;{this.props.name}&lt;/div&gt;
+          &lt;div className="product-card card__country"&gt;{this.props.country}&lt;/div&gt;
+          &lt;div className="product-card card__date"&gt;{this.props.date}&lt;/div&gt;
+          &lt;div className="product-card card__gender"&gt;{this.props.gender}&lt;/div&gt;
         &lt;/div&gt;
       &lt;/&gt;
     );
   }
 }
 &nbsp;
-export { ProductCard };
+export { UserCard };
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
