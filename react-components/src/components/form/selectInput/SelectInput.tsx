@@ -1,7 +1,7 @@
 import React from 'react';
 
 type SelectInputProps = {
-  selectRef: React.RefObject<HTMLInputElement>;
+  selectRef: React.RefObject<HTMLSelectElement>;
   labelText: string;
   values: string[];
 };
@@ -15,10 +15,10 @@ class SelectInput extends React.Component<SelectInputProps> {
     return (
       <label>
         {this.props.labelText}
-        <select>
+        <select ref={this.props.selectRef}>
           {this.props.values.map((item, index) => {
             return (
-              <option value="item" key={index}>
+              <option value={item} key={index}>
                 {item}
               </option>
             );
