@@ -12,11 +12,11 @@ class ProductCard extends React.Component<ProductCardProps, unknown> {
   render(): React.ReactNode {
     return (
       <>
-        <div className="product-card">
-          <img className="product-card__img" src={this.props.img} alt="" />
-          <div className="product-card__title">{this.props.title}</div>
-          <div className="product-card__price">${this.props.price}</div>
-          <div className="product-card__desc">{this.props.description}</div>
+        <div className="product-card card">
+          <img className="product-card card__img" src={this.props.img} alt="" />
+          <div className="product-card card__title">{this.props.title}</div>
+          <div className="product-card card__price">${this.props.price}</div>
+          <div className="product-card card__desc">{this.props.description}</div>
         </div>
       </>
     );
