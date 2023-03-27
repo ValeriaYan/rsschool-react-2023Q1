@@ -26,6 +26,12 @@ class UserForm extends React.Component<UserFormProps, UserFormState> {
   radioRefs: React.RefObject<HTMLInputElement>[];
   fileRef: React.RefObject<HTMLInputElement>;
   formRef: React.RefObject<HTMLFormElement>;
+  errors: {
+    emptyNameField: boolean;
+    emptyDateField: boolean;
+    emptyConfirmCheckbox: boolean;
+    emptyRadioFields: boolean;
+  };
   constructor(props: UserFormProps) {
     super(props);
     this.textRef = React.createRef();
@@ -37,66 +43,50 @@ class UserForm extends React.Component<UserFormProps, UserFormState> {
     this.formRef = React.createRef();
 
     this.state = {
+      cardCreated: false,
+    };
+
+    this.errors = {
       emptyNameField: false,
       emptyDateField: false,
       emptyConfirmCheckbox: false,
       emptyRadioFields: false,
-      cardCreated: false,
     };
     this.onSubmit = this.onSubmit.bind(this);
   }
 
   checkFields() {
-    let isOk = false;
     if (this.textRef.current && this.textRef.current.value === '') {
-      this.setState({
-        emptyNameField: true,
-      });
-      isOk = false;
+      this.errors['emptyNameField'] = true;
     } else {
-      this.setState({
-        emptyNameField: false,
-      });
-      isOk = true;
+      this.errors['emptyNameField'] = false;
     }
+
     if (this.dateRef.current && this.dateRef.current.value === '') {
-      this.setState({
-        emptyDateField: true,
-      });
-      isOk = false;
+      this.errors['emptyDateField'] = true;
     } else {
-      this.setState({
-        emptyDateField: false,
-      });
-      isOk = true;
+      this.errors['emptyDateField'] = false;
     }
 
     const radiosNotEmpty = this.radioRefs.some((elem) => elem.current?.checked);
     if (!radiosNotEmpty) {
-      this.setState({
-        emptyRadioFields: true,
-      });
-      isOk = false;
+      this.errors['emptyRadioFields'] = true;
     } else {
-      this.setState({
-        emptyRadioFields: false,
-      });
-      isOk = true;
+      this.errors['emptyRadioFields'] = false;
     }
 
     if (this.checkboxRef.current && !this.checkboxRef.current.checked) {
-      this.setState({
-        emptyConfirmCheckbox: true,
-      });
-      isOk = false;
+      this.errors['emptyConfirmCheckbox'] = true;
     } else {
-      this.setState({
-        emptyConfirmCheckbox: false,
-      });
-      isOk = true;
+      this.errors['emptyConfirmCheckbox'] = false;
     }
 
-    return isOk;
+    return (
+      !this.errors['emptyNameField'] &&
+      !this.errors['emptyDateField'] &&
+      !this.errors['emptyRadioFields'] &&
+      !this.errors['emptyConfirmCheckbox']
+    );
   }
 
   onSubmit(event: React.FormEvent) {
@@ -125,6 +115,9 @@ class UserForm extends React.Component<UserFormProps, UserFormState> {
       });
       this.formRef.current?.reset();
     }
+    this.setState({
+      cardCreated: false,
+    });
   }
 
   componentDidUpdate() {
@@ -138,21 +131,23 @@ class UserForm extends React.Component<UserFormProps, UserFormState> {
   render() {
     return (
       <form onSubmit={this.onSubmit} ref={this.formRef}>
-        {this.state.emptyNameField && <div className="error">{'Name can not be empty'}</div>}
+        {this.errors['emptyNameField'] && <div className="error">{'Name can not be empty'}</div>}
         <TextInput textRef={this.textRef} labelText="Name: " />
-        {this.state.emptyDateField && <div className="error">{'Date can not be empty'}</div>}
+        {this.errors['emptyDateField'] && <div className="error">{'Date can not be empty'}</div>}
         <DateInput dateRef={this.dateRef} labelText="Date of Birth: " />
         <SelectInput
           selectRef={this.selectRef}
           labelText="Choose country: "
           values={['Russian', 'Ukraine', 'USA', 'Belarus', 'Poland', 'Kazakhstan']}
         />
-        {this.state.emptyRadioFields && <div className="error">{'Gender can not be empty'}</div>}
+        {this.errors['emptyRadioFields'] && (
+          <div className="error">{'Gender can not be empty'}</div>
+        )}
         <div className="radio-buttons">
           <RadioInputs radioRefs={this.radioRefs} name="gender" values={['man', 'woman']} />
         </div>
         <FileInput fileRef={this.fileRef} labelText="Choose user card image" />
-        {this.state.emptyConfirmCheckbox && (
+        {this.errors['emptyConfirmCheckbox'] && (
           <div className="error">
             {'You must confirm that you agree to the processing of personal data'}
           </div>
