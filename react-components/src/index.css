@@ -40,11 +40,16 @@ body {
   text-align: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--background-color);
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+h2 {
+  color:rgb(172, 172, 172);
 }
 
 button {
@@ -74,7 +79,7 @@ label {
   display: block;
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
@@ -85,4 +90,4 @@ label {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
