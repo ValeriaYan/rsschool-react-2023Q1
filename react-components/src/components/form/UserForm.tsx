@@ -31,6 +31,7 @@ class UserForm extends React.Component<UserFormProps, UserFormState> {
     emptyDateField: boolean;
     emptyConfirmCheckbox: boolean;
     emptyRadioFields: boolean;
+    emptySelectField: boolean;
   };
   constructor(props: UserFormProps) {
     super(props);
@@ -51,6 +52,7 @@ class UserForm extends React.Component<UserFormProps, UserFormState> {
       emptyDateField: false,
       emptyConfirmCheckbox: false,
       emptyRadioFields: false,
+      emptySelectField: false,
     };
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -81,6 +83,13 @@ class UserForm extends React.Component<UserFormProps, UserFormState> {
       this.errors['emptyConfirmCheckbox'] = false;
     }
 
+    if (this.selectRef.current && this.selectRef.current.value == 'default') {
+      this.errors['emptySelectField'] = true;
+    } else {
+      this.errors['emptySelectField'] = false;
+    }
+
+    console.log(this.selectRef?.current?.value);
     return (
       !this.errors['emptyNameField'] &&
       !this.errors['emptyDateField'] &&
@@ -135,6 +144,9 @@ class UserForm extends React.Component<UserFormProps, UserFormState> {
         <TextInput textRef={this.textRef} labelText="Name: " />
         {this.errors['emptyDateField'] && <div className="error">{'Date can not be empty'}</div>}
         <DateInput dateRef={this.dateRef} labelText="Date of Birth: " />
+        {this.errors['emptySelectField'] && (
+          <div className="error">{'Country can not be empty'}</div>
+        )}
         <SelectInput
           selectRef={this.selectRef}
           labelText="Choose country: "

@@ -16,6 +16,7 @@ class SelectInput extends React.Component<SelectInputProps> {
       <label>
         {this.props.labelText}
         <select ref={this.props.selectRef}>
+          <option value="default">{'--choose--'}</option>
           {this.props.values.map((item, index) => {
             return (
               <option value={item} key={index}>
