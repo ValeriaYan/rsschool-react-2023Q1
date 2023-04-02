@@ -1,44 +1,28 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { UserForm } from '../components/form/UserForm';
 import { UsersList } from '../components/userCardList/UsersList';
 import { User } from '../components/userCardList/UsersList';
 
-type FormPageState = {
-  users: User[];
-};
-class FormPage extends React.Component<unknown, FormPageState> {
-  users: User[];
-  constructor(props: unknown) {
-    super(props);
-    this.users = [];
-    if (localStorage.getItem('users')) {
-      this.users = JSON.parse(localStorage.getItem('users') as string);
-    }
-    this.state = {
-      users: this.users,
-    };
+function FormPage() {
+  const [users, setUsers] = useState<User[]>(
+    JSON.parse(localStorage.getItem('users') as string) || []
+  );
 
-    this.updateData = this.updateData.bind(this);
+  function updateData(user: User) {
+    setUsers([...users, user]);
   }
 
-  updateData(user: User) {
-    this.users.push(user);
-    this.setState({
-      users: this.users,
-    });
+  useEffect(() => {
+    localStorage.setItem('users', JSON.stringify(users));
+  }, [users]);
 
-    localStorage.setItem('users', JSON.stringify(this.users));
-  }
-
-  render(): React.ReactNode {
-    return (
-      <>
-        <UserForm updateData={this.updateData} />
-        <h2>Your cards</h2>
-        <UsersList users={this.state.users} />
-      </>
-    );
-  }
+  return (
+    <>
+      <UserForm updateData={updateData} />
+      <h2>Your cards</h2>
+      <UsersList users={users} />
+    </>
+  );
 }
 
 export { FormPage };
