@@ -13,7 +13,6 @@ function Search() {
 
   function onInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     setValue(event.target.value);
-    console.log(value);
   }
 
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import {
   TextInput,
@@ -28,12 +28,16 @@ function UserForm(props: UserFormProps) {
     register,
     handleSubmit,
     reset,
-    getValues,
     formState: { errors },
   } = useForm<IFormValues>();
 
+  const [isSubmit, setSubmit] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setSubmit(false), 2000);
+  }, [isSubmit]);
+
   const onSubmit: SubmitHandler<IFormValues> = (data) => {
-    console.log(data);
     props.updateData({
       name: data.name,
       date: data.date,
@@ -41,6 +45,7 @@ function UserForm(props: UserFormProps) {
       img: URL.createObjectURL(data.file[0] as Blob),
       country: data.country,
     });
+    setSubmit(true);
     reset();
   };
 
@@ -62,9 +67,7 @@ function UserForm(props: UserFormProps) {
         values={['Russian', 'Ukraine', 'USA', 'Belarus', 'Poland', 'Kazakhstan']}
         required="Country can't be empty!"
       />
-      <div className="error">
-        {getValues('country') == 'default' && <p>{"Country can't be empty!"}</p>}
-      </div>
+      <div className="error">{errors?.country && <p>{errors.country.message || 'Error!'}</p>}</div>
       <RadioInputs
         register={register}
         name="gender"
@@ -87,6 +90,7 @@ function UserForm(props: UserFormProps) {
         required
       />
       <div className="error">{errors?.confirm && <p>{errors.confirm.message || 'Error!'}</p>}</div>
+      {isSubmit && <p className="success-message">The card has been created!</p>}
       <button type="submit">Create User Card</button>
     </form>
   );

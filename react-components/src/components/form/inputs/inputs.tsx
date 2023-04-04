@@ -68,7 +68,16 @@ function SelectInput({ label, value, register, required, values }: SelectInputPr
   return (
     <label>
       {label}
-      <select {...register(value, { required })}>
+      <select
+        {...register(value, {
+          required,
+          validate: {
+            validateValue: (v) => {
+              return v !== 'default' || 'Please, choose country!';
+            },
+          },
+        })}
+      >
         <option value="default">{'--choose--'}</option>
         {values.map((item, index) => {
           return (
