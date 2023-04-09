@@ -8,7 +8,6 @@ function Search(props: searchProps) {
   const [value, setValue] = useState(localStorage.getItem('value') || '');
 
   useEffect(() => {
-    console.log('effect');
     props.updateData(value);
   }, []);
 
@@ -25,7 +24,12 @@ function Search(props: searchProps) {
   return (
     <>
       <form className="search" onSubmit={onSubmit}>
-        <input type="search" onChange={onInputChange} value={value} />
+        <input
+          type="search"
+          onChange={onInputChange}
+          value={value}
+          placeholder="Find a character by name"
+        />
         <button type="submit">
           <svg
             fill="#eeeeee"

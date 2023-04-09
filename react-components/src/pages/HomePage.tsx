@@ -32,7 +32,7 @@ function HomePage(): React.ReactNode {
 
   let result: React.ReactNode;
   if (error) {
-    result = <div className="error">Error: {error.message}</div>;
+    result = <div className="home-error">{error.message}</div>;
   } else if (!isLoaded) {
     result = <div className="loading">Loading...</div>;
   } else {

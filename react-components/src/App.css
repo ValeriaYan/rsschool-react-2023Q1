@@ -31,7 +31,7 @@
     margin-bottom: 20px;
 
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.8);
     border-radius: 10px;
 
     cursor: pointer;
@@ -41,7 +41,7 @@
 }
 
 .card:hover {
-    background-color: var(--sub-color);
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 
@@ -56,7 +56,7 @@
     color: var(--text-main-color);
 }
 
-.card__price {
+.card__subtitle {
     font-size: 20px;
 }
 
@@ -72,7 +72,8 @@
 
     font-size: 18px;
     border-radius: 9px;
-    border: 1px solid #eeeeee;
+    border: 1px solid var(--text-main-color);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .search input {
@@ -104,7 +105,27 @@
 }
 
 .error {
-    color: var(--error-color);
+    color:rgb(255, 45, 45);
+}
+
+.home-error {
+    position: relative;
+    color:rgb(255, 45, 45);
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.home-error::after {
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translate(-50%);
+    width: 300px;
+    height: 500px;
+    background-image: url("/error-image.png");
+    background-size: 400px;
+    background-repeat: no-repeat;
 }
 
 form {
@@ -115,9 +136,9 @@ form {
     margin: 0 auto;
 
     font-size: 18px;
-    background-color: var(--sub-color);
     border-radius: 10px;
-    color: rgb(172, 172, 172);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 form label {
@@ -188,7 +209,7 @@ button[type="submit"] {
 
 @media(max-width: 1200px) {
     .card {
-        flex: 0 0 45%;
+        flex: 0 0 40%;
     }
 
     form {
@@ -196,7 +217,7 @@ button[type="submit"] {
     }
 }
 
-@media(max-width: 800px) {
+@media(max-width: 830px) {
     .card {
         flex: 0 0 100%;
     }

@@ -1,24 +1,23 @@
 import React from 'react';
+import { Card } from '../cardList/CardsList';
 
 type ProductCardProps = {
+  click: (content: Card) => void;
   key?: string;
-  name?: string;
-  gender?: string;
-  species?: string;
-  img?: string;
+  card: Card;
 };
 
 class ProductCard extends React.Component<ProductCardProps, unknown> {
   render(): React.ReactNode {
     return (
       <>
-        <div className="product-card card">
+        <div className="product-card card" onClick={this.props.click.bind(this, this.props.card)}>
           <div className="product-card card__img">
-            <img src={this.props.img} alt="" />
+            <img src={this.props.card.image} alt="" />
           </div>
-          <div className="product-card card__title">{this.props.name}</div>
-          <div className="product-card card__price">{this.props.species}</div>
-          <div className="product-card card__desc">{this.props.gender}</div>
+          <div className="product-card card__title">{this.props.card.name}</div>
+          <div className="product-card card__subtitle">{this.props.card.species}</div>
+          <div className="product-card card__desc">{this.props.card.gender}</div>
         </div>
       </>
     );
