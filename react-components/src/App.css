@@ -67,6 +67,7 @@
     display: inline-flex;
     flex-direction: row-reverse;
     align-items: center;
+    justify-content: start;
     padding: 10px;
 
     font-size: 18px;
@@ -79,11 +80,27 @@
     outline: none;
     margin-left: 10px;
     font-size: 20px;
-    color:rgb(172, 172, 172)
+    color:rgb(172, 172, 172);
+    width: 100%;
 }
 
-.search > input:focus ~ svg {
+.search >  button > svg {
    fill: var(--text-main-color);
+}
+
+.search > button {
+    padding: 10px 20px;
+    border: none;
+}
+
+.search > button:active {
+    outline: none;
+    border: none;
+    background-color: var(--sub-color);
+}
+
+.search > button:focus {
+    outline: none;
 }
 
 .error {

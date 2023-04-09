@@ -2,33 +2,41 @@ import React from 'react';
 import { ProductCard } from './ProductCard';
 
 type CardsListProps = {
-  products: Card[];
+  characters: Card[];
 };
 
 export type Card = {
   id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: {
-    id: number;
+  name: string;
+  status: string;
+  species: string;
+  type: string;
+  gender: string;
+  origin: {
     name: string;
-    image: string;
+    url: string;
   };
-  images: string[];
+  location: {
+    name: string;
+    url: string;
+  };
+  image: string;
+  episode: string[];
+  url: string;
+  created: string;
 };
 
 class CardsList extends React.Component<CardsListProps, unknown> {
   render(): React.ReactNode {
     return (
       <>
-        {this.props.products.map((card) => (
+        {this.props.characters.map((card) => (
           <ProductCard
             key={String(card.id)}
-            title={card.title}
-            price={card.price}
-            description={card.description}
-            img={card.images[0]}
+            name={card.name}
+            gender={card.gender}
+            species={card.species}
+            img={card.image}
           />
         ))}
       </>
