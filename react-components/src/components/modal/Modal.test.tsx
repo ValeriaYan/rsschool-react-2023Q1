@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { ProductCard } from './ProductCard';
-import { Card } from './CardsList';
+import { Modal } from './Modal';
+import { Card } from 'components/cardList/CardsList';
 
 const testCharacters: Card[] = [
   {
@@ -29,11 +29,9 @@ const testCharacters: Card[] = [
     created: '2017-11-04T18:48:46.250Z',
   },
 ];
-
-describe('ProductCard', () => {
+describe('UserForm', () => {
   let modalActive = false;
   let modalContent = testCharacters[0];
-
   function setModalActive(active: boolean) {
     modalActive = active;
   }
@@ -41,17 +39,12 @@ describe('ProductCard', () => {
   function setModalContent(card: Card) {
     modalContent = card;
   }
-
-  function onClickCard(content: Card) {
-    setModalContent(content);
-    setModalActive(true);
-  }
-  it('render test for ProductCard', () => {
+  it('render test for UserForm', () => {
     render(
-      <ProductCard
-        click={onClickCard}
-        key={String(testCharacters[0].id)}
-        card={testCharacters[0]}
+      <Modal
+        active={modalActive}
+        setActive={setModalActive as React.Dispatch<React.SetStateAction<boolean>>}
+        content={modalContent}
       />
     );
   });

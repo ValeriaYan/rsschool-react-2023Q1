@@ -4,47 +4,57 @@ import React from 'react';
 import { CardsList } from './CardsList';
 import { Card } from './CardsList';
 
-const testProducts: Card[] = [
+const testCharacters: Card[] = [
   {
-    id: 4,
-    title: 'title',
-    price: 54,
-    description: 'desc',
-    category: {
-      id: 34,
-      name: '1',
-      image: 'url',
+    id: 1,
+    name: 'Rick Sanchez',
+    status: 'Alive',
+    species: 'Human',
+    type: '',
+    gender: 'Male',
+    origin: {
+      name: 'Earth',
+      url: 'https://rickandmortyapi.com/api/location/1',
     },
-    images: ['some url'],
+    location: {
+      name: 'Earth',
+      url: 'https://rickandmortyapi.com/api/location/20',
+    },
+    image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+    episode: [
+      'https://rickandmortyapi.com/api/episode/1',
+      'https://rickandmortyapi.com/api/episode/2',
+    ],
+    url: 'https://rickandmortyapi.com/api/character/1',
+    created: '2017-11-04T18:48:46.250Z',
   },
   {
-    id: 4,
-    title: 'title',
-    price: 54,
-    description: 'desc',
-    category: {
-      id: 34,
-      name: '1',
-      image: 'url',
+    id: 1,
+    name: 'Rick Sanchez',
+    status: 'Alive',
+    species: 'Human',
+    type: '',
+    gender: 'Male',
+    origin: {
+      name: 'Earth',
+      url: 'https://rickandmortyapi.com/api/location/1',
     },
-    images: ['some url'],
-  },
-  {
-    id: 4,
-    title: 'title',
-    price: 54,
-    description: 'desc',
-    category: {
-      id: 34,
-      name: '1',
-      image: 'url',
+    location: {
+      name: 'Earth',
+      url: 'https://rickandmortyapi.com/api/location/20',
     },
-    images: ['some url'],
+    image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+    episode: [
+      'https://rickandmortyapi.com/api/episode/1',
+      'https://rickandmortyapi.com/api/episode/2',
+    ],
+    url: 'https://rickandmortyapi.com/api/character/1',
+    created: '2017-11-04T18:48:46.250Z',
   },
 ];
 
 describe('CardsList', () => {
   it('render test for CardsList', () => {
-    render(<CardsList products={testProducts} />);
+    render(<CardsList characters={testCharacters} />);
   });
 });
