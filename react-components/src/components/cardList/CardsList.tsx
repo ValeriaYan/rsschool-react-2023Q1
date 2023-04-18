@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ProductCard } from './ProductCard';
 import { Modal } from '../modal/Modal';
-import Card from '../../models/ICard'
+import Card from '../../models/ICard';
 
 type CardsListProps = {
   characters: Card[];

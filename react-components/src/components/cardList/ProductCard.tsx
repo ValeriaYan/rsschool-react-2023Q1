@@ -1,5 +1,5 @@
 import React from 'react';
-import Card  from '../../models/ICard';
+import Card from '../../models/ICard';
 
 type ProductCardProps = {
   click: (content: Card) => void;

@@ -8,11 +8,9 @@ import {
   RadioInputs,
   CheckboxInput,
 } from './inputs/inputs';
-import { User } from '../userCardList/UsersList';
-
-type UserFormProps = {
-  updateData: (users: User) => void;
-};
+import User from '../../models/IUser';
+import { useAppDispatch } from '../../hooks/hooks';
+import { addUser } from '../../store/usersSlice';
 
 export interface IFormValues {
   name: string;
@@ -23,7 +21,7 @@ export interface IFormValues {
   confirm: boolean;
 }
 
-function UserForm(props: UserFormProps) {
+function UserForm() {
   const {
     register,
     handleSubmit,
@@ -32,19 +30,21 @@ function UserForm(props: UserFormProps) {
   } = useForm<IFormValues>();
 
   const [isSubmit, setSubmit] = useState(false);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setTimeout(() => setSubmit(false), 2000);
   }, [isSubmit]);
 
   const onSubmit: SubmitHandler<IFormValues> = (data) => {
-    props.updateData({
+    const user: User = {
       name: data.name,
       date: data.date,
       gender: data.gender,
       img: URL.createObjectURL(data.file[0] as Blob),
       country: data.country,
-    });
+    };
+    dispatch(addUser(user));
     setSubmit(true);
     reset();
   };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CardsList } from '../components/cardList/CardsList';
 import { Search } from '../components/search/Search';
-import Card  from '../models/ICard';
+import Card from '../models/ICard';
 import { useAppSelector } from '../hooks/hooks';
 
 function HomePage(): React.ReactNode {

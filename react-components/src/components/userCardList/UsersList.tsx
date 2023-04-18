@@ -1,28 +1,24 @@
 import React from 'react';
 import { UserCard } from './UserCard';
-import User from '../../models/IUser'
+import { useAppSelector } from '../../hooks/hooks';
 
-type UserListProps = {
-  users: User[];
-};
+function UsersList() {
+  const users = useAppSelector((state) => state.users.users);
 
-class UsersList extends React.Component<UserListProps, unknown> {
-  render(): React.ReactNode {
-    return (
-      <div className="card-list">
-        {this.props.users.map((user, index) => (
-          <UserCard
-            key={String(index)}
-            name={user.name}
-            date={user.date}
-            gender={user.gender}
-            img={user.img}
-            country={user.country}
-          />
-        ))}
-      </div>
-    );
-  }
+  return (
+    <div className="card-list">
+      {users.map((user, index) => (
+        <UserCard
+          key={String(index)}
+          name={user.name}
+          date={user.date}
+          gender={user.gender}
+          img={user.img}
+          country={user.country}
+        />
+      ))}
+    </div>
+  );
 }
 
 export { UsersList };
