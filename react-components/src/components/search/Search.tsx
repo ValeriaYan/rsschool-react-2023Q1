@@ -1,24 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import { saveValue } from '../../store/searchSlice';
 
-type searchProps = {
-  updateData: (value: string) => void;
-};
-
-function Search(props: searchProps) {
-  const [value, setValue] = useState(localStorage.getItem('value') || '');
-
-  useEffect(() => {
-    props.updateData(value);
-  }, []);
-
-  function onInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setValue(event.target.value);
-  }
+function Search() {
+  const savedValue = useAppSelector((state) => state.search.value);
+  const dispatch = useAppDispatch();
+  const [value, setValue] = useState(savedValue ? savedValue : '');
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event?.preventDefault();
-    localStorage.setItem('value', value);
-    props.updateData(value);
+    event.preventDefault();
+    dispatch(saveValue(value));
+  }
+
+  function onChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setValue(event.target.value);
   }
 
   return (
@@ -26,7 +21,7 @@ function Search(props: searchProps) {
       <form className="search" onSubmit={onSubmit}>
         <input
           type="search"
-          onChange={onInputChange}
+          onChange={onChange}
           value={value}
           placeholder="Find a character by name"
         />

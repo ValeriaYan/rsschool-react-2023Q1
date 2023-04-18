@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { CardsList } from '../components/cardList/CardsList';
 import { Search } from '../components/search/Search';
 import { Card } from '../components/cardList/CardsList';
+import { useAppSelector } from '../hooks/hooks';
 
 function HomePage(): React.ReactNode {
   const [error, setError] = useState<Error | null>(null);
   const [characters, setCharacters] = useState<Card[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [value, setValue] = useState('');
+  const value = useAppSelector((state) => state.search.value);
 
   useEffect(() => {
     const url = value
@@ -26,10 +27,6 @@ function HomePage(): React.ReactNode {
       });
   }, [value]);
 
-  function updateData(value: string) {
-    setValue(value);
-  }
-
   let result: React.ReactNode;
   if (error) {
     result = <div className="home-error">{error.message}</div>;
@@ -44,7 +41,7 @@ function HomePage(): React.ReactNode {
   }
   return (
     <>
-      <Search updateData={updateData} />
+      <Search />
       {result}
     </>
   );
