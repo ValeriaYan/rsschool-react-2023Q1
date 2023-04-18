@@ -12,6 +12,6 @@ describe('search', () => {
     setValue(value);
   }
   it('render test for Search', () => {
-    render(<Search updateData={updateData} />);
+    render(<Search />);
   });
 });

@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 
 import { CardsList } from './CardsList';
-import { Card } from './CardsList';
+import Card from '../../models/ICard';
 
 const testCharacters: Card[] = [
   {

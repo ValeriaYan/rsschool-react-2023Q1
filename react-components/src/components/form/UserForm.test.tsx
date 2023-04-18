@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { User } from '../userCardList/UsersList';
+import User from '../../models/IUser';
 import { UserForm } from './UserForm';
 
 describe('UserForm', () => {
@@ -10,6 +10,6 @@ describe('UserForm', () => {
     users.push(user);
   }
   it('render test for UserForm', () => {
-    render(<UserForm updateData={updateData} />);
+    render(<UserForm />);
   });
 });

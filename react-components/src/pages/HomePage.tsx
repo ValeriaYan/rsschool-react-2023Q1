@@ -8,22 +8,16 @@ function HomePage(): React.ReactNode {
   const value = useAppSelector((state) => state.search.value);
   const { data: characters, error, isLoading } = charactersApi.useFetchAllCharactersQuery(value);
 
-  let result: React.ReactNode;
-  if (characters) {
-    result = (
-      <div className="card-list">
-        <CardsList characters={characters.results} />
-      </div>
-    );
-  } else if (error) {
-    result = <div className="home-error">Here is nothing</div>;
-  } else if (!isLoading) {
-    result = <div className="loading">Loading...</div>;
-  }
   return (
     <>
       <Search />
-      {result}
+      {isLoading && <div className="loading">Loading...</div>}
+      {error && <div className="home-error">There is nothing here</div>}
+      {characters && !error && (
+        <div className="card-list">
+          <CardsList characters={characters.results} />
+        </div>
+      )}
     </>
   );
 }
