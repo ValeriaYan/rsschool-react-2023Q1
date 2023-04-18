@@ -1,16 +1,9 @@
 import React from 'react';
 import { UserCard } from './UserCard';
+import User from '../../models/IUser'
 
 type UserListProps = {
   users: User[];
-};
-
-export type User = {
-  name?: string;
-  date?: string;
-  gender?: string;
-  img?: string;
-  country?: string;
 };
 
 class UsersList extends React.Component<UserListProps, unknown> {
